@@ -3,11 +3,12 @@ const Router = express.Router()
 const mongoose = require("mongoose")
 const TaskSchema = mongoose.model("TaskSchema")
 
-
+//Geting all tasklist from DB
 Router.get("/alltask", (req, res)=>
 {
     TaskSchema.find().then((data)=>
     {
+        //If the data exists
         if(data)
         {
             res.json(data)
@@ -24,6 +25,7 @@ Router.get("/alltask", (req, res)=>
         }
     }).catch((err)=>
     {
+        //Handling error
         res.json(
             {
                 error: "Nothing Data"

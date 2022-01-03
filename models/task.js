@@ -1,5 +1,7 @@
 const mongoose = require("mongoose")
 
+
+//Creating schema
 const TaskSchema = new mongoose.Schema(
     {
         taskname : {
@@ -13,5 +15,5 @@ const TaskSchema = new mongoose.Schema(
     }
 )
 
-
+//Exporting the schema
 exports.TaskSchema = mongoose.model("TaskSchema", TaskSchema)

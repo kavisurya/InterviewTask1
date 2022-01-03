@@ -3,12 +3,16 @@ const Router = express.Router()
 const mongoose = require("mongoose")
 const TaskSchema = mongoose.model("TaskSchema")
 
+//Posting the task to the DB
 Router.post("/post_task", (req,res)=>
 {
+
+    //Getting data from request body
     var {taskname, to} =  req.body
 
     if(!taskname || !to)
     {
+        //If the data empty or missing
         res.json(
             {
                 error: "please fill all fields"
@@ -18,6 +22,7 @@ Router.post("/post_task", (req,res)=>
     }
     else
     {
+        //Creating ins.. to insert the data to DB 
         let insert = new TaskSchema(
             {
                 taskname,
@@ -25,10 +30,12 @@ Router.post("/post_task", (req,res)=>
             }
         )
 
+        //Inserting the data
         insert.save().then((data)=>
         {
             if(data)
             {
+                //If the data inserted success
                 res.json(
                     {
                         success: "Data inserted Sucesss"
@@ -38,6 +45,8 @@ Router.post("/post_task", (req,res)=>
             }
             else
             {
+                //If the data inserted failure
+
                 res.json(
                     {
                         error: "Data not inserted"
@@ -47,6 +56,7 @@ Router.post("/post_task", (req,res)=>
             }
         }).catch((err)=>
         {
+            //Handling the error
             res.json(
                 {
                     error: "Something :("
